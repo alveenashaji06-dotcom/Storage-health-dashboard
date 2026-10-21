@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>InfraWatch | Infrastructure Monitoring</title>
+</head>
+
+<body>
+    <header>
+        <h1 class = "main-heading">InfraWatch</h1> 
+
+        <h2>Infrastructure Monitoring Dashboard </h2> 
+        <section>
+        <h2 id="system-title">Netapp Storage</h2>
+        <p id ="system-message">Netapp is being Monitored</p>
+        <button id="change-button">change system</button>
+        </section>
+    </header>
+   
+    <h2>Managed Storage Systems</h2>
+<ul class = "storage-list">
+    <li>Netapp Storage</li>
+    <li>Pure Storage</li>
+    <li>Dell Storage</li>
+</ul>
+ <h2>Quick Navigation</h2>
+ <ol>
+<li><a href="#Capacity">Capacity & Utilization</a></li>
+<li><a href="#System-health">System Health</a></li>
+<li><a href="#Active-Alerts">Active Alerts</a></li>
+<li><a href="#Troubleshooting">Troubleshooting Checklist</a></li>
+ </ol>
+
+    <h2 id ="Capacity">Storage Capacity & Utilization</h2>
+    <p id= "system-health">Overall System Status</p>
+    <div class ="table-container">
+    <table>
+        <tr>
+            <th>Storage system</th>
+            <th>Total Capacity</th>
+            <th>used Capacity</th>
+            <th>Available Capacity</th>
+            <th>Health Status</th>
+            
+        </tr>
+        <tr>
+            <td>Netapp Storage</td>
+            <td>100 TB</td>
+            <td>65 TB </td>
+            <td>35 TB</td>
+            <td>Healthy</td>
+        </tr>
+        <tr>
+            <td>Pure Storage</td>
+            <td>50 TB</td>
+            <td>20 TB</td>
+            <td>30 TB</td>
+            <td>Healthy</td>
+        </tr>
+        <tr>
+            <td>Dell Storage</td>
+            <td id="dell-total">250</td>
+            <td id="dell-used">195</td>
+            <td id="dell-available">25</td>
+            <td id="dell-status">Warning </td>
+        </tr>
+    </table>
+    </div>
+    <div class ="capacity-control">
+        <label for="used-input">Dell Used Capacity(TB)</label>
+        <input type = "number"id="used-input"value="195" min="0"max="250">
+        <button id="update-button">Update Dashboard</button>
+    </div>
+    <section id="Active-Alerts">
+        <h2>Active Alerts</h2>
+        <div class="alert-warning">
+            <h3>Storage Utilization Alerts</h3>
+            <p><span id="dell-used-alert">225</span>TB of 250 TB is currently used.</p>
+            <p>Storage Utilization:<span id="dell-utilization">90%</span></p>
+            <p id="Action-Msg"> Monitor capacity and plan for expansion.</p>
+        </div>
+    </section>
+    <nav>
+    <h2>Technical Resources</h2>
+  
+    <a href ="https://www.google.com/" >google </a>
+
+    <a href ="https://www.youtube.com/" >youtube </a>
+
+    <a href ="https://www.linkedin.com/in/alveena-shaji-a600b6286/" >Linkedin </a>
+
+    </nav>
+
+    <img src="Storage.jpg" alt="storage">
+    <main>
+<h2>Report an Incident</h2>
+    <form>
+        <label for="name">Name</label>
+        <input
+         type ="text"
+         id="name"
+         placeholder="enter your name"
+         required >
+        <label for ="storage-system">Affected Storage System</label>
+        <select id = "storage-system">
+            <option value="netapp">Netapp Storage</option>
+            <option value ="dell">Dell Storage</option>
+            <option value ="pure">Pure Storage</option>
+        </select>
+
+        <label for = "issue-description">Incident Description</label>
+        <textarea id="issue-description"
+        placeholder="describe the issue"
+        required ></textarea>
+        <h3>Incident Priority</h3>
+        <input type="radio" id="low" name="Incident Priority" value="low">
+        <label for="low">Low</label>
+        <input type = "radio" id="medium" name="Incident Priority" value="medium">
+        <label for="medium">Medium</label>
+        <input type="radio" id="high" name="Incident Priority" value="high">
+        <label for="high">High</label>
+            <h3>Issue Category</h3>
+            <input type="checkbox" id="capacity" name="issue-category" value="capacity">
+            <label for="capacity">Capacity</label>
+            <input type="checkbox" id="performance" name="issue-category" value="performance">
+            <label for="performance">Performance</label>
+            <input type="checkbox" id="connectivity" name="issue-category" value="connectivity">
+            <label for="connectivity">Connectivity</label>
+        
+        <label for ="email">Email</label>
+        <input id="email"
+         type = "email"
+         placeholder = "enter your email id"
+         required >
+         <label for = "affected-capacity">Affected Capacity</label>
+         <input id="affected-capacity"
+         type = "number"
+         placeholder="enter capacity in TB"
+         required >    
+        <button type = "submit">submit</button>
+    </form>
+     </main>
+    <footer>
+    <p>InfraWatch | Infrastructure Monitoring Dashboard</p>
+    <p>Demo project — sample storage data</p>
+</footer>
+/*javascript */
+<script>
+    const totalCapacity = Number(
+        document.getElementById("dell-total").textContent
+    );
+    const usedinput= document.getElementById("used-input");
+    const updatebutton= document.getElementById("update-button");
+        function updateDashboard() {
+            const usedCapacity = Number(usedinput.value);
+            if (
+                usedinput.value.trim() === ""||
+                usedCapacity < 0 ||
+                usedCapacity > totalCapacity
+            ) {
+                alert("enter a capacity between 0 and "+ totalCapacity + "TB");
+                return;
+
+            }
+
+    const utilization = (usedCapacity / totalCapacity) * 100;
+
+    document.getElementById("dell-utilization").textContent =
+        utilization + "%";
+
+    document.getElementById("dell-used-alert").textContent =
+        usedCapacity;
+
+    document.getElementById("dell-available").textContent =
+        (totalCapacity - usedCapacity) + " TB";
+
+    const statusElement = document.getElementById("dell-status");
+    const ActionMsg = document.getElementById("Action-Msg");
+
+    if (utilization >= 90) {
+        statusElement.textContent = "Critical";
+        statusElement.className = "status-critical";
+        ActionMsg.textContent = "Urgent action required. Plan capacity expansion immediately.";
+
+
+    } else if (utilization >= 80) {
+        statusElement.textContent = "Warning";
+        statusElement.className = "status-warning";
+        ActionMsg.textContent = "Monitor capacity and plan for expansion.";
+    } else {
+        statusElement.textContent = "Healthy";
+        statusElement.className ="status-healthy";
+        ActionMsg.textContent = "Capacity is within the acceptable range.";
+    }
+}
+updatebutton.addEventListener("click",updateDashboard);
+
+const SystemTitle = document.getElementById("system-title");
+const ChangeButton = document.getElementById("change-button");
+const SystemMsg = document.getElementById("system-message");
+
+ChangeButton.addEventListener("click", function () {  
+    if (SystemTitle.textContent === "Netapp Storage")  {
+    SystemTitle.textContent = "Dell Storage";
+    SystemMsg.textContent= "Dell Storage is being Monitored";
+    }
+    else {
+       SystemTitle.textContent = "Netapp Storage";
+       SystemMsg.textContent = "Netapp Storage is being Monitored";
+    }
+});
+const StorageSystem =  ["Netapp Storage", "Pure Storage", "Dell Storage"
+];
+for (const system of StorageSystem){
+    console.log(system);
+
+}   
+</script>
+</body>
+</html>

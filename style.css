@@ -1,0 +1,211 @@
+/* Main heading */
+h1 {
+    color: rgb(20, 21, 110);
+    font-size: 36px;
+    text-align: center;
+    font-weight: 700;
+    padding: 20px;
+    margin: 30px;
+    border: 2px solid darkolivegreen;
+    border-radius: 20px;
+    background-color: rgb(221, 239, 200);
+}
+
+/* Other headings */
+h2 {
+    color: orangered;
+    font-size: 30px;
+    text-align: left;
+    font-weight: 600;
+    padding: 15px;
+    margin: 10px;
+}
+h3{
+  color:darkolivegreen;
+  text-align: left;
+  padding:10px;
+  margin:5px;
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  padding: 20px;
+
+}
+
+/* Storage table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid darkolivegreen;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: darkolivegreen;
+    color: white;
+}
+
+/* Storage system cards */
+.storage-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+   
+.storage-list li {
+    color: darkolivegreen;
+    background-color: bisque;
+    padding: 20px;
+    border: 2px solid darkolivegreen;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+/* Dashboard checklist */
+ol {
+    color: darkolivegreen;
+    font-size: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 2px solid darkolivegreen;
+    padding: 20px 35px;
+    background-color: rgb(245, 191, 126);
+}
+
+/* Navigation */
+nav {
+    background-color: bisque;
+    padding: 15px;
+}
+input, select, textarea { 
+  padding: 10px;
+  margin:8px;
+  border:1px solid darkolivegreen;
+  border-radius: 5px;
+  font-size: 15px;
+}
+button {
+background-color: darkolivegreen;
+color:white;
+padding:12px 25px;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+
+}
+button:hover {
+    background-color: olive;
+}
+form {
+    color: darkolivegreen;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 25px;
+    background-color: bisque;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+form label {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="number"],
+form select,
+form textarea {
+    display: block;
+    width: 100%;
+    max-width: none;
+    padding: 10px;
+    margin: 8px 0 15px;
+    border: 1px solid darkolivegreen;
+    border-radius: 5px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+main {
+  width:100%;
+  box-sizing: border-box;
+  margin:20px 0;
+}
+.table-container {
+  width:100%;
+  overflow-x:auto;
+
+}
+@media (max-width: 900px) {
+    h1 {
+        font-size: 26px;
+        padding: 12px;
+        margin: 15px 0;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    form {
+        padding: 15px;
+    }
+    .storage-list {
+      grid-template-columns: repeat(2, minmax (0, 1fr));
+      
+    } 
+  }
+  @media (max-width: 600px)
+  {
+    .storage-list {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+  }
+  .alert-warning {
+    background-color: #fff3cd;
+    color: #664d03;
+    border:1px solid #ffcc00;
+    border-left:6px solid #e0a800;
+    border-radius:8px;
+    padding:15px;
+    margin:15px 10px;
+  }
+  .alert-warning h3{
+    color:#856404;
+    margin-top: 0;
+  }
+  .status-critical {
+    color:red;
+    font-weight: bold;
+  }
+  .status-warning {
+    color:b8860b;
+    font-weight: bold;
+  }
+  .status-healthy {
+    color:green;
+    font-weight: bold;
+    
+  }
+  
+  footer{
+    margin-top: 30px;
+    padding:15px;
+    text-align: center;
+    background-color: bisque;
+    color: darkolivegreen;
+
+  }
