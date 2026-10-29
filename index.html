@@ -18,6 +18,37 @@
         <button id="change-button">change system</button>
         </section>
     </header>
+    <section class = "summary-cards">
+        <div class = "summary-card">
+            <h3>Total Cpacity</h3>
+            <p id= "total-capacity">400 TB</p>    
+        </div>
+        <div class = "summary-card">
+            <h3>Used Cpacity</h3>
+            <p id ="used-capacity">285 TB</p>
+        </div>
+        <div class = "summary-card">
+            <h3>Available Capacity</h3>
+            <p id="available-capacity">115 TB</p>
+        </div>
+        <div class="summary-card">
+            <h3>Active Alerts</h3>
+            <p id="active-alerts-count">1</p>
+        </div>
+     <div class ="summary-card">
+        <h3>Healthy Systems</h3>
+        <p id="healthy-count">0</p>
+
+    </div>
+    <div class ="summary-card">
+    <h3>Warning Systems</h3>
+    <p id ="warning-count">0</p>
+    </div>
+    <div class ="summary-card">
+        <h3>Critical Systems</h3>
+        <p id="critical-count">0</p>
+    </div>
+    </section>
    
     <h2>Managed Storage Systems</h2>
 <ul class = "storage-list">
@@ -43,28 +74,44 @@
             <th>used Capacity</th>
             <th>Available Capacity</th>
             <th>Health Status</th>
+            <th>Utilization</th>
             
         </tr>
         <tr>
             <td>Netapp Storage</td>
-            <td>100 TB</td>
-            <td>65 TB </td>
-            <td>35 TB</td>
-            <td>Healthy</td>
+            <td id ="netapp-total">100 TB</td>
+            <td id="netapp-used">65 TB </td>
+            <td id="netapp-available">35 TB</td>
+            <td id= "netapp-status">Healthy</td>
+            <td>
+                <div class = "progress-bar">
+                    <div class = "progress-fill" id="netapp-progress"></div>
+                </div>
+            </td>
         </tr>
         <tr>
             <td>Pure Storage</td>
-            <td>50 TB</td>
-            <td>20 TB</td>
-            <td>30 TB</td>
-            <td>Healthy</td>
+            <td id ="pure-total">50 TB</td>
+            <td id ="pure-used">20 TB</td>
+            <td id ="pure-available">30 TB</td>
+            <td id="pure-status">Healthy</td>
+            <td>
+                <div class="progress-bar">
+                    <div class = "progress-fill" id="pure-progress"></div>
+                </div>
+            </td>
         </tr>
         <tr>
             <td>Dell Storage</td>
             <td id="dell-total">250</td>
-            <td id="dell-used">195</td>
+            <td id="dell-used">200</td>
             <td id="dell-available">25</td>
             <td id="dell-status">Warning </td>
+            <td>
+                <div class="progress-bar">
+                    <div class = "progress-fill" id="dell-progress"></div>
+                </div>
+            </td>
         </tr>
     </table>
     </div>
@@ -77,7 +124,7 @@
         <h2>Active Alerts</h2>
         <div class="alert-warning">
             <h3>Storage Utilization Alerts</h3>
-            <p><span id="dell-used-alert">225</span>TB of 250 TB is currently used.</p>
+            <p><span id="dell-used-alert">225</span></p>
             <p>Storage Utilization:<span id="dell-utilization">90%</span></p>
             <p id="Action-Msg"> Monitor capacity and plan for expansion.</p>
         </div>
@@ -164,21 +211,24 @@
                 return;
 
             }
+            StorageSystems[2].used = usedCapacity;
+            displayStorageData();
 
     const utilization = (usedCapacity / totalCapacity) * 100;
 
     document.getElementById("dell-utilization").textContent =
         utilization + "%";
 
-    document.getElementById("dell-used-alert").textContent =
+    document.getElementById("dell-used").textContent =
         usedCapacity;
 
     document.getElementById("dell-available").textContent =
         (totalCapacity - usedCapacity) + " TB";
 
     const statusElement = document.getElementById("dell-status");
+    const capacityMsg = document.getElementById("dell-used-alert");
+    capacityMsg.textContent = (`${usedCapacity} TB of ${totalCapacity} TB is currently used.`);
     const ActionMsg = document.getElementById("Action-Msg");
-
     if (utilization >= 90) {
         statusElement.textContent = "Critical";
         statusElement.className = "status-critical";
@@ -211,12 +261,108 @@ ChangeButton.addEventListener("click", function () {
        SystemMsg.textContent = "Netapp Storage is being Monitored";
     }
 });
-const StorageSystem =  ["Netapp Storage", "Pure Storage", "Dell Storage"
+const  StorageSystems = [
+    {name: "Netapp Storage", capacity:100, used:65},
+    {name: "Pure Storage", capacity:50, used:20},
+    {name: "Dell Storage", capacity:250, used: 200}
 ];
-for (const system of StorageSystem){
-    console.log(system);
 
-}   
+function displayStorageData() {
+    for(const system of StorageSystems) {
+        const percentage = system.used / system.capacity *100;
+        const available = system.capacity - system.used;
+        console.log(system.name, percentage + "%", available +"TB");
+        let status;
+        let prefix;
+
+        if (percentage >= 90) {
+            status = "Critical";
+        } else if (percentage >= 80) {
+            status = "Warning";
+        } else {
+            status = "Healthy";
+        }
+
+        if (system.name === "Netapp Storage") {
+            prefix = "netapp";
+        } else if (system.name === "Pure Storage") {
+            prefix = "pure";
+        } else {
+            prefix = "dell";
+        }
+        const progressbar = document.getElementById(prefix + "-progress");
+        progressbar.style.width = percentage + "%";
+        if (percentage>=90) {
+            progressbar.style.backgroundColor = "#dc2626";
+        } else if(percentage>=80) {
+            progressbar.style.backgroundColor = "#d97706";
+
+        } else {
+            progressbar.style.backgroundcolor = "#16a34a";
+        }
+
+
+        document.getElementById(prefix + "-total").textContent =
+            system.capacity + " TB";
+
+        document.getElementById(prefix + "-used").textContent =
+            system.used + " TB";
+
+        document.getElementById(prefix + "-available").textContent =
+            available + " TB";
+
+       const statusElement = document.getElementById(prefix + "-status");
+       statusElement.textContent = status;
+       statusElement.className = "status-" +status.toLowerCase();
+       
+    }
+    let healthyCount = 0;
+    let warningcount = 0;
+    let criticalcount = 0;
+    for (const system of StorageSystems) {
+        const utilization = (system.used/system.capacity)*100;
+        if (utilization >= 90){
+            criticalcount++;
+        }else if (utilization >=80) {
+            warningcount++;    
+        }else {
+            healthyCount++;
+
+        }
+    }
+    document.getElementById("healthy-count").textContent = healthyCount;
+    document.getElementById("warning-count").textContent = warningcount;
+    document.getElementById("critical-count").textContent = criticalcount;
+
+    const summaryTotal = StorageSystems.reduce(
+        (total,system)=>total+system.capacity,0
+    );
+    const summaryUsed = StorageSystems.reduce(
+        (total,system) =>total+system.used, 0
+    );
+    const summaryAvailable = summaryTotal - summaryUsed;
+    /*const healthyCount = StorageSystems.filter(system =>
+        (system.used /system.capacity) *100<80
+    ).length;
+    const warningCount = StorageSystems.filter(system =>
+    {
+        const utilization = (system.used /system.capacity)*100;
+        return utilzation >= 80 && utilization<90
+    }).length; */
+    const activeAlerts =StorageSystems.filter(system => {
+        const utilization = (system.used / system.capacity)* 100;
+        return utilization >= 80;   
+    }).length;
+    document.getElementById ("active-alerts-count").textContent = activeAlerts;
+    document.getElementById("total-capacity").textContent = summaryTotal + " TB";
+    document.getElementById("used-capacity").textContent = summaryUsed + " TB";
+    document.getElementById("available-capacity").textContent = summaryAvailable + " TB";
+
+}
+
+displayStorageData();
+console.log(StorageSystems);
+console.log(StorageSystems[2].used);
 </script>
 </body>
 </html>
