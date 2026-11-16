@@ -9,25 +9,20 @@
 
 <body>
     <header>
-        <h1 class = "main-heading">InfraWatch</h1> 
-
-        <h2>Infrastructure Monitoring Dashboard </h2> 
-        <section>
-        <h2 id="system-title">Netapp Storage</h2>
-        <p id ="system-message">Netapp is being Monitored</p>
-        <button id="change-button">change system</button>
-        </section>
+        <h1 class="main-heading">InfraWatch</h1> 
+        <h2>Infrastructure Monitoring Dashboard</h2> 
     </header>
-    <section class = "summary-cards">
-        <div class = "summary-card">
-            <h3>Total Cpacity</h3>
-            <p id= "total-capacity">400 TB</p>    
+
+    <section class="summary-cards">
+        <div class="summary-card">
+            <h3>Total Capacity</h3>
+            <p id="total-capacity">400 TB</p>    
         </div>
-        <div class = "summary-card">
-            <h3>Used Cpacity</h3>
-            <p id ="used-capacity">285 TB</p>
+        <div class="summary-card">
+            <h3>Used Capacity</h3>
+            <p id="used-capacity">285 TB</p>
         </div>
-        <div class = "summary-card">
+        <div class="summary-card">
             <h3>Available Capacity</h3>
             <p id="available-capacity">115 TB</p>
         </div>
@@ -35,334 +30,465 @@
             <h3>Active Alerts</h3>
             <p id="active-alerts-count">1</p>
         </div>
-     <div class ="summary-card">
-        <h3>Healthy Systems</h3>
-        <p id="healthy-count">0</p>
+        <div class="summary-card">
+            <h3>Healthy Systems</h3>
+            <p id="healthy-count">0</p>
+        </div>
+        <div class="summary-card">
+            <h3>Warning Systems</h3>
+            <p id="warning-count">0</p>
+        </div>
+        <div class="summary-card">
+            <h3>Critical Systems</h3>
+            <p id="critical-count">0</p>
+        </div>
+    </section>
 
-    </div>
-    <div class ="summary-card">
-    <h3>Warning Systems</h3>
-    <p id ="warning-count">0</p>
-    </div>
-    <div class ="summary-card">
-        <h3>Critical Systems</h3>
-        <p id="critical-count">0</p>
-    </div>
+    <section id="system-health-overview">
+        <h2>System Health Overview</h2>
+        <div class="health-overview-cards">
+            <div class="health-overview-card">
+                <h3>Netapp Storage</h3>
+                <p>Utilization: <span id="netapp-overview-utilization">65%</span></p>
+                <p>Status: <span id="netapp-overview-status">Healthy</span></p>
+            </div>
+            <div class="health-overview-card">
+                <h3>Pure Storage</h3>
+                <p>Utilization: <span id="pure-overview-utilization">40%</span></p>
+                <p>Status: <span id="pure-overview-status">Healthy</span></p>
+            </div>
+            <div class="health-overview-card">
+                <h3>Dell Storage</h3>
+                <p>Utilization: <span id="dell-overview-utilization">80%</span></p>
+                <p>Status: <span id="dell-overview-status">Warning</span></p>   
+            </div>
+        </div>
     </section>
    
     <h2>Managed Storage Systems</h2>
-<ul class = "storage-list">
-    <li>Netapp Storage</li>
-    <li>Pure Storage</li>
-    <li>Dell Storage</li>
-</ul>
- <h2>Quick Navigation</h2>
- <ol>
-<li><a href="#Capacity">Capacity & Utilization</a></li>
-<li><a href="#System-health">System Health</a></li>
-<li><a href="#Active-Alerts">Active Alerts</a></li>
-<li><a href="#Troubleshooting">Troubleshooting Checklist</a></li>
- </ol>
+    <ul class="storage-list">
+        <li>Netapp Storage</li>
+        <li>Pure Storage</li>
+        <li>Dell Storage</li>
+    </ul>
 
-    <h2 id ="Capacity">Storage Capacity & Utilization</h2>
-    <p id= "system-health">Overall System Status</p>
-    <div class ="table-container">
-    <table>
-        <tr>
-            <th>Storage system</th>
-            <th>Total Capacity</th>
-            <th>used Capacity</th>
-            <th>Available Capacity</th>
-            <th>Health Status</th>
-            <th>Utilization</th>
-            
-        </tr>
-        <tr>
-            <td>Netapp Storage</td>
-            <td id ="netapp-total">100 TB</td>
-            <td id="netapp-used">65 TB </td>
-            <td id="netapp-available">35 TB</td>
-            <td id= "netapp-status">Healthy</td>
-            <td>
-                <div class = "progress-bar">
-                    <div class = "progress-fill" id="netapp-progress"></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>Pure Storage</td>
-            <td id ="pure-total">50 TB</td>
-            <td id ="pure-used">20 TB</td>
-            <td id ="pure-available">30 TB</td>
-            <td id="pure-status">Healthy</td>
-            <td>
-                <div class="progress-bar">
-                    <div class = "progress-fill" id="pure-progress"></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>Dell Storage</td>
-            <td id="dell-total">250</td>
-            <td id="dell-used">200</td>
-            <td id="dell-available">25</td>
-            <td id="dell-status">Warning </td>
-            <td>
-                <div class="progress-bar">
-                    <div class = "progress-fill" id="dell-progress"></div>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <h2>Quick Navigation</h2>
+    <ol>
+        <li><a href="#Capacity">Capacity & Utilization</a></li>
+        <li><a href="#system-health">System Health</a></li>
+        <li><a href="#Active-Alerts">Active Alerts</a></li>
+        <li><a href="#Inc_card">Report an incident</a></li>
+    </ol>
+
+    <h2 id="Capacity">Storage Capacity & Utilization</h2>
+    <p id="system-health">Overall System Status</p>
+    
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Storage system</th>
+                <th>Total Capacity</th>
+                <th>Used Capacity</th>
+                <th>Available Capacity</th>
+                <th>Health Status</th>
+                <th>Utilization</th>
+            </tr>
+            <tr>
+                <td>Netapp Storage</td>
+                <td id="netapp-total">100 TB</td>
+                <td id="netapp-used">65 TB</td>
+                <td id="netapp-available">35 TB</td>
+                <td id="netapp-status">Healthy</td>
+                <td>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="netapp-progress"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Pure Storage</td>
+                <td id="pure-total">50 TB</td>
+                <td id="pure-used">20 TB</td>
+                <td id="pure-available">30 TB</td>
+                <td id="pure-status">Healthy</td>
+                <td>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="pure-progress"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Dell Storage</td>
+                <td id="dell-total">250 TB</td>
+                <td id="dell-used">200 TB</td>
+                <td id="dell-available">50 TB</td>
+                <td id="dell-status">Warning</td>
+                <td>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="dell-progress"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
-    <div class ="capacity-control">
-        <label for="used-input">Dell Used Capacity(TB)</label>
-        <input type = "number"id="used-input"value="195" min="0"max="250">
+
+    <div class="capacity-control">
+        <label for="used-input">Dell Used Capacity (TB)</label>
+        <input type="number" id="used-input" value="195" min="0" max="250">
         <button id="update-button">Update Dashboard</button>
     </div>
+
     <section id="Active-Alerts">
         <h2>Active Alerts</h2>
         <div class="alert-warning">
             <h3>Storage Utilization Alerts</h3>
-            <p><span id="dell-used-alert">225</span></p>
-            <p>Storage Utilization:<span id="dell-utilization">90%</span></p>
-            <p id="Action-Msg"> Monitor capacity and plan for expansion.</p>
+            <p><span id="dell-used-alert">225 TB of 250 TB is currently used.</span></p>
+            <p>Storage Utilization: <span id="dell-utilization">90%</span></p>
+            <p id="Action-Msg">Monitor capacity and plan for expansion.</p>
         </div>
     </section>
+
+    <main class="incident-layout">
+        <section class="incident-form-card">
+            <form>
+                <h2 id="Inc_card">Report an Incident</h2>
+                
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+
+                <label for="storage-system">Affected Storage System</label>
+                <select id="storage-system">
+                    <option value="netapp">Netapp Storage</option>
+                    <option value="dell">Dell Storage</option>
+                    <option value="pure">Pure Storage</option>
+                </select>
+
+                <label for="issue-description">Incident Description</label>
+                <textarea id="issue-description" placeholder="Describe the issue" required></textarea>
+
+                <h3>Incident Priority</h3>
+                <input type="radio" id="low" name="incident-priority" value="low">
+                <label for="low">Low</label>
+                <input type="radio" id="medium" name="incident-priority" value="medium">
+                <label for="medium">Medium</label>
+                <input type="radio" id="high" name="incident-priority" value="high">
+                <label for="high">High</label>
+
+                <h3>Issue Category</h3>
+                <input type="checkbox" id="capacity-cat" name="issue-category" value="capacity">
+                <label for="capacity-cat">Capacity</label>
+                <input type="checkbox" id="performance" name="issue-category" value="performance">
+                <label for="performance">Performance</label>
+                <input type="checkbox" id="connectivity" name="issue-category" value="connectivity">
+                <label for="connectivity">Connectivity</label>
+
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="Enter your email id" required>
+
+                <label for="affected-capacity">Affected Capacity</label>
+                <input id="affected-capacity" type="number" placeholder="Enter capacity in TB" required>    
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <aside class="backup-performance-panel">
+            <h2>Backup Performance</h2>
+
+            <div class="backup-success-card">
+                <p>Backup Success Rate</p>
+                <h3 id="backup-success-rate">96.4%</h3>
+                <span id="backup-period-label">Last 7 Days</span>
+
+                <p class="backup-comparison">
+                    <span id="backup-trend-indicator">↑ 2.4%</span>
+                    <span> compared to previous period</span>
+                </p>
+            </div>
+
+            <div class="backup-stats">
+                <div>
+                    <p>Total Jobs</p>
+                    <h3 id="total-backup-jobs">55</h3>
+                </div>
+                <div>
+                    <p>Successful</p>
+                    <h3 id="successful-backups">53</h3>
+                </div>
+                <div>
+                    <p>Failed</p>
+                    <h3 id="failed-backups">2</h3>
+                </div>
+            </div>
+
+            <div class="backup-trend">
+                <div class="backup-trend-header">
+                    <h3>Backup Trend</h3>
+                    <select id="backup-time-range">
+                        <option value="24hours">Last 24 Hours</option>
+                        <option value="7days" selected>Last 7 Days</option>
+                        <option value="30days">Last 30 Days</option>
+                    </select>
+                </div>
+                <canvas id="backupTrendChart"></canvas>
+            </div>
+        </aside>
+    </main>
+
     <nav>
-    <h2>Technical Resources</h2>
-  
-    <a href ="https://www.google.com/" >google </a>
-
-    <a href ="https://www.youtube.com/" >youtube </a>
-
-    <a href ="https://www.linkedin.com/in/alveena-shaji-a600b6286/" >Linkedin </a>
-
+        <h2>Technical Resources</h2>
+        <a href="https://www.google.com/">Google</a>
+        <a href="https://www.youtube.com/">YouTube</a>
+        <a href="https://www.linkedin.com/in/alveena-shaji-a600b6286/">LinkedIn</a>
     </nav>
 
-    <img src="Storage.jpg" alt="storage">
-    <main>
-<h2>Report an Incident</h2>
-    <form>
-        <label for="name">Name</label>
-        <input
-         type ="text"
-         id="name"
-         placeholder="enter your name"
-         required >
-        <label for ="storage-system">Affected Storage System</label>
-        <select id = "storage-system">
-            <option value="netapp">Netapp Storage</option>
-            <option value ="dell">Dell Storage</option>
-            <option value ="pure">Pure Storage</option>
-        </select>
-
-        <label for = "issue-description">Incident Description</label>
-        <textarea id="issue-description"
-        placeholder="describe the issue"
-        required ></textarea>
-        <h3>Incident Priority</h3>
-        <input type="radio" id="low" name="Incident Priority" value="low">
-        <label for="low">Low</label>
-        <input type = "radio" id="medium" name="Incident Priority" value="medium">
-        <label for="medium">Medium</label>
-        <input type="radio" id="high" name="Incident Priority" value="high">
-        <label for="high">High</label>
-            <h3>Issue Category</h3>
-            <input type="checkbox" id="capacity" name="issue-category" value="capacity">
-            <label for="capacity">Capacity</label>
-            <input type="checkbox" id="performance" name="issue-category" value="performance">
-            <label for="performance">Performance</label>
-            <input type="checkbox" id="connectivity" name="issue-category" value="connectivity">
-            <label for="connectivity">Connectivity</label>
-        
-        <label for ="email">Email</label>
-        <input id="email"
-         type = "email"
-         placeholder = "enter your email id"
-         required >
-         <label for = "affected-capacity">Affected Capacity</label>
-         <input id="affected-capacity"
-         type = "number"
-         placeholder="enter capacity in TB"
-         required >    
-        <button type = "submit">submit</button>
-    </form>
-     </main>
     <footer>
-    <p>InfraWatch | Infrastructure Monitoring Dashboard</p>
-    <p>Demo project — sample storage data</p>
-</footer>
-/*javascript */
-<script>
-    const totalCapacity = Number(
-        document.getElementById("dell-total").textContent
-    );
-    const usedinput= document.getElementById("used-input");
-    const updatebutton= document.getElementById("update-button");
-        function updateDashboard() {
+        <p>InfraWatch | Infrastructure Monitoring Dashboard</p>
+        <p>Demo project — sample storage data</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const StorageSystems = [
+            { name: "Netapp Storage", capacity: 100, used: 65 },
+            { name: "Pure Storage", capacity: 50, used: 20 },
+            { name: "Dell Storage", capacity: 250, used: 200 }
+        ];
+
+        function displayStorageData() {
+            for (const system of StorageSystems) {
+                const percentage = (system.used / system.capacity) * 100;
+                const available = system.capacity - system.used;
+                let status;
+                let prefix;
+
+                if (percentage >= 90) {
+                    status = "Critical";
+                } else if (percentage >= 80) {
+                    status = "Warning";
+                } else {
+                    status = "Healthy";
+                }
+
+                if (system.name === "Netapp Storage") {
+                    prefix = "netapp";
+                } else if (system.name === "Pure Storage") {
+                    prefix = "pure";
+                } else {
+                    prefix = "dell";
+                }
+
+                const progressbar = document.getElementById(prefix + "-progress");
+                if (progressbar) {
+                    progressbar.style.width = percentage + "%";
+                    if (percentage >= 90) {
+                        progressbar.style.backgroundColor = "#dc2626";
+                    } else if (percentage >= 80) {
+                        progressbar.style.backgroundColor = "#d97706";
+                    } else {
+                        progressbar.style.backgroundColor = "#16a34a";
+                    }
+                }
+
+                const totalElem = document.getElementById(prefix + "-total");
+                if (totalElem) totalElem.textContent = system.capacity + " TB";
+
+                const usedElem = document.getElementById(prefix + "-used");
+                if (usedElem) usedElem.textContent = system.used + " TB";
+
+                const availElem = document.getElementById(prefix + "-available");
+                if (availElem) availElem.textContent = available + " TB";
+
+                const statusElement = document.getElementById(prefix + "-status");
+                if (statusElement) {
+                    statusElement.textContent = status;
+                    statusElement.className = "status-" + status.toLowerCase();
+                }
+
+                const overviewUtil = document.getElementById(prefix + "-overview-utilization");
+                if (overviewUtil) overviewUtil.textContent = percentage.toFixed(0) + "%";
+
+                const overviewStatus = document.getElementById(prefix + "-overview-status");
+                if (overviewStatus) {
+                    overviewStatus.textContent = status;
+                    overviewStatus.className = "status-" + status.toLowerCase();
+                }
+            }
+
+            let healthyCount = 0;
+            let warningcount = 0;
+            let criticalcount = 0;
+            
+            for (const system of StorageSystems) {
+                const utilization = (system.used / system.capacity) * 100;
+                if (utilization >= 90) {
+                    criticalcount++;
+                } else if (utilization >= 80) {
+                    warningcount++;    
+                } else {
+                    healthyCount++;
+                }
+            }
+
+            document.getElementById("healthy-count").textContent = healthyCount;
+            document.getElementById("warning-count").textContent = warningcount;
+            document.getElementById("critical-count").textContent = criticalcount;
+
+            const summaryTotal = StorageSystems.reduce((total, system) => total + system.capacity, 0);
+            const summaryUsed = StorageSystems.reduce((total, system) => total + system.used, 0);
+            const summaryAvailable = summaryTotal - summaryUsed;
+            
+            const activeAlerts = StorageSystems.filter(system => {
+                const utilization = (system.used / system.capacity) * 100;
+                return utilization >= 80;    
+            }).length;
+
+            document.getElementById("active-alerts-count").textContent = activeAlerts;
+            document.getElementById("total-capacity").textContent = summaryTotal + " TB";
+            document.getElementById("used-capacity").textContent = summaryUsed + " TB";
+            document.getElementById("available-capacity").textContent = summaryAvailable + " TB";
+
+            // Dell dynamic alert update
+            const dellSystem = StorageSystems[2];
+            const dellUtilization = (dellSystem.used / dellSystem.capacity) * 100;
+            document.getElementById("dell-utilization").textContent = dellUtilization.toFixed(0) + "%";
+            document.getElementById("dell-used-alert").textContent = `${dellSystem.used} TB of ${dellSystem.capacity} TB is currently used.`;
+            
+            const actionMsg = document.getElementById("Action-Msg");
+            const dellStatusElem = document.getElementById("dell-status");
+            if (dellUtilization >= 90) {
+                dellStatusElem.textContent = "Critical";
+                dellStatusElem.className = "status-critical";
+                actionMsg.textContent = "Urgent action required. Plan capacity expansion immediately.";
+            } else if (dellUtilization >= 80) {
+                dellStatusElem.textContent = "Warning";
+                dellStatusElem.className = "status-warning";
+                actionMsg.textContent = "Monitor capacity and plan for expansion.";
+            } else {
+                dellStatusElem.textContent = "Healthy";
+                dellStatusElem.className = "status-healthy";
+                actionMsg.textContent = "Capacity is within the acceptable range.";
+            }
+        }
+
+        const usedinput = document.getElementById("used-input");
+        const updatebutton = document.getElementById("update-button");
+        
+        updatebutton.addEventListener("click", function() {
             const usedCapacity = Number(usedinput.value);
+            const totalCapacity = StorageSystems[2].capacity;
             if (
-                usedinput.value.trim() === ""||
+                usedinput.value.trim() === "" ||
+                isNaN(usedCapacity) ||
                 usedCapacity < 0 ||
                 usedCapacity > totalCapacity
             ) {
-                alert("enter a capacity between 0 and "+ totalCapacity + "TB");
+                alert("Enter a capacity between 0 and " + totalCapacity + " TB");
                 return;
-
             }
             StorageSystems[2].used = usedCapacity;
             displayStorageData();
+        });
 
-    const utilization = (usedCapacity / totalCapacity) * 100;
+        displayStorageData();
 
-    document.getElementById("dell-utilization").textContent =
-        utilization + "%";
+        // Sample backup trend data
+        const backupTrendData = {
+            "24hours": {
+                labels: Array.from({ length: 24 }, (_, i) => `${String(i).padStart(2, "0")}:00`),
+                values: [98, 96, 99, 97, 95, 98, 100, 96, 97, 99, 95, 98, 97, 96, 99, 98, 94, 97, 99, 96, 98, 100, 97, 98]
+            },
+            "7days": {
+                labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                values: [96, 98, 94, 99, 97, 100, 98]
+            },
+            "30days": {
+                labels: Array.from({ length: 30 }, (_, i) => `Day ${i + 1}`),
+                values: [96, 98, 94, 97, 99, 95, 98, 97, 96, 99, 94, 98, 97, 95, 100, 96, 98, 97, 94, 99, 96, 98, 95, 97, 99, 96, 98, 100, 97, 98]
+            }
+        };
 
-    document.getElementById("dell-used").textContent =
-        usedCapacity;
+        const backupRangeSelect = document.getElementById("backup-time-range");
+        const backupChartCanvas = document.getElementById("backupTrendChart");
 
-    document.getElementById("dell-available").textContent =
-        (totalCapacity - usedCapacity) + " TB";
+        const backupTrendChart = new Chart(backupChartCanvas, {
+            type: "line",
+            data: {
+                labels: backupTrendData["7days"].labels,
+                datasets: [{
+                    label: "Backup Success Rate",
+                    data: backupTrendData["7days"].values,
+                    borderColor: "#2563eb",
+                    backgroundColor: "rgba(37, 99, 235, 0.10)",
+                    fill: true,
+                    tension: 0.35,
+                    pointRadius: 3,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    y: {
+                        min: 80,
+                        max: 100,
+                        title: { display: true, text: "Success Rate (%)" }
+                    },
+                    x: {
+                        title: { display: true, text: "Time Period" }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
 
-    const statusElement = document.getElementById("dell-status");
-    const capacityMsg = document.getElementById("dell-used-alert");
-    capacityMsg.textContent = (`${usedCapacity} TB of ${totalCapacity} TB is currently used.`);
-    const ActionMsg = document.getElementById("Action-Msg");
-    if (utilization >= 90) {
-        statusElement.textContent = "Critical";
-        statusElement.className = "status-critical";
-        ActionMsg.textContent = "Urgent action required. Plan capacity expansion immediately.";
+        const previousPeriodRates = {
+            "24hours": 95.5,
+            "7days": 94.0,
+            "30days": 95.0
+        };
 
+        function updateBackupTrend() {
+            const selectedRange = backupRangeSelect.value;
+            const selectedData = backupTrendData[selectedRange];
 
-    } else if (utilization >= 80) {
-        statusElement.textContent = "Warning";
-        statusElement.className = "status-warning";
-        ActionMsg.textContent = "Monitor capacity and plan for expansion.";
-    } else {
-        statusElement.textContent = "Healthy";
-        statusElement.className ="status-healthy";
-        ActionMsg.textContent = "Capacity is within the acceptable range.";
-    }
-}
-updatebutton.addEventListener("click",updateDashboard);
+            backupTrendChart.data.labels = selectedData.labels;
+            backupTrendChart.data.datasets[0].data = selectedData.values;
+            backupTrendChart.update();
 
-const SystemTitle = document.getElementById("system-title");
-const ChangeButton = document.getElementById("change-button");
-const SystemMsg = document.getElementById("system-message");
+            const total = selectedData.values.reduce((sum, value) => sum + value, 0);
+            const average = total / selectedData.values.length;
 
-ChangeButton.addEventListener("click", function () {  
-    if (SystemTitle.textContent === "Netapp Storage")  {
-    SystemTitle.textContent = "Dell Storage";
-    SystemMsg.textContent= "Dell Storage is being Monitored";
-    }
-    else {
-       SystemTitle.textContent = "Netapp Storage";
-       SystemMsg.textContent = "Netapp Storage is being Monitored";
-    }
-});
-const  StorageSystems = [
-    {name: "Netapp Storage", capacity:100, used:65},
-    {name: "Pure Storage", capacity:50, used:20},
-    {name: "Dell Storage", capacity:250, used: 200}
-];
+            document.getElementById("backup-success-rate").textContent = average.toFixed(1) + "%";
 
-function displayStorageData() {
-    for(const system of StorageSystems) {
-        const percentage = system.used / system.capacity *100;
-        const available = system.capacity - system.used;
-        console.log(system.name, percentage + "%", available +"TB");
-        let status;
-        let prefix;
+            const periodLabels = {
+                "24hours": "Last 24 Hours",
+                "7days": "Last 7 Days",
+                "30days": "Last 30 Days"
+            };
 
-        if (percentage >= 90) {
-            status = "Critical";
-        } else if (percentage >= 80) {
-            status = "Warning";
-        } else {
-            status = "Healthy";
+            document.getElementById("backup-period-label").textContent = periodLabels[selectedRange];
+
+            const difference = average - previousPeriodRates[selectedRange];
+            const indicator = document.getElementById("backup-trend-indicator");
+
+            if (difference > 0) {
+                indicator.textContent = "↑ " + difference.toFixed(1) + "%";
+                indicator.className = "improved";
+            } else if (difference < 0) {
+                indicator.textContent = "↓ " + Math.abs(difference).toFixed(1) + "%";
+                indicator.className = "declined";
+            } else {
+                indicator.textContent = "— 0.0%";
+                indicator.className = "unchanged";
+            }
         }
 
-        if (system.name === "Netapp Storage") {
-            prefix = "netapp";
-        } else if (system.name === "Pure Storage") {
-            prefix = "pure";
-        } else {
-            prefix = "dell";
-        }
-        const progressbar = document.getElementById(prefix + "-progress");
-        progressbar.style.width = percentage + "%";
-        if (percentage>=90) {
-            progressbar.style.backgroundColor = "#dc2626";
-        } else if(percentage>=80) {
-            progressbar.style.backgroundColor = "#d97706";
-
-        } else {
-            progressbar.style.backgroundcolor = "#16a34a";
-        }
-
-
-        document.getElementById(prefix + "-total").textContent =
-            system.capacity + " TB";
-
-        document.getElementById(prefix + "-used").textContent =
-            system.used + " TB";
-
-        document.getElementById(prefix + "-available").textContent =
-            available + " TB";
-
-       const statusElement = document.getElementById(prefix + "-status");
-       statusElement.textContent = status;
-       statusElement.className = "status-" +status.toLowerCase();
-       
-    }
-    let healthyCount = 0;
-    let warningcount = 0;
-    let criticalcount = 0;
-    for (const system of StorageSystems) {
-        const utilization = (system.used/system.capacity)*100;
-        if (utilization >= 90){
-            criticalcount++;
-        }else if (utilization >=80) {
-            warningcount++;    
-        }else {
-            healthyCount++;
-
-        }
-    }
-    document.getElementById("healthy-count").textContent = healthyCount;
-    document.getElementById("warning-count").textContent = warningcount;
-    document.getElementById("critical-count").textContent = criticalcount;
-
-    const summaryTotal = StorageSystems.reduce(
-        (total,system)=>total+system.capacity,0
-    );
-    const summaryUsed = StorageSystems.reduce(
-        (total,system) =>total+system.used, 0
-    );
-    const summaryAvailable = summaryTotal - summaryUsed;
-    /*const healthyCount = StorageSystems.filter(system =>
-        (system.used /system.capacity) *100<80
-    ).length;
-    const warningCount = StorageSystems.filter(system =>
-    {
-        const utilization = (system.used /system.capacity)*100;
-        return utilzation >= 80 && utilization<90
-    }).length; */
-    const activeAlerts =StorageSystems.filter(system => {
-        const utilization = (system.used / system.capacity)* 100;
-        return utilization >= 80;   
-    }).length;
-    document.getElementById ("active-alerts-count").textContent = activeAlerts;
-    document.getElementById("total-capacity").textContent = summaryTotal + " TB";
-    document.getElementById("used-capacity").textContent = summaryUsed + " TB";
-    document.getElementById("available-capacity").textContent = summaryAvailable + " TB";
-
-}
-
-displayStorageData();
-console.log(StorageSystems);
-console.log(StorageSystems[2].used);
-</script>
+        backupRangeSelect.addEventListener("change", updateBackupTrend);
+        updateBackupTrend();
+    </script>
 </body>
 </html>
