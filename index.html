@@ -8,252 +8,376 @@
 </head>
 
 <body>
-    <header>
-        <h1 class="main-heading">InfraWatch</h1> 
-        <h2>Infrastructure Monitoring Dashboard</h2> 
-    </header>
 
-    <section class="summary-cards">
-        <div class="summary-card">
-            <h3>Total Capacity</h3>
-            <p id="total-capacity">400 TB</p>    
-        </div>
-        <div class="summary-card">
-            <h3>Used Capacity</h3>
-            <p id="used-capacity">285 TB</p>
-        </div>
-        <div class="summary-card">
-            <h3>Available Capacity</h3>
-            <p id="available-capacity">115 TB</p>
-        </div>
-        <div class="summary-card">
-            <h3>Active Alerts</h3>
-            <p id="active-alerts-count">1</p>
-        </div>
-        <div class="summary-card">
-            <h3>Healthy Systems</h3>
-            <p id="healthy-count">0</p>
-        </div>
-        <div class="summary-card">
-            <h3>Warning Systems</h3>
-            <p id="warning-count">0</p>
-        </div>
-        <div class="summary-card">
-            <h3>Critical Systems</h3>
-            <p id="critical-count">0</p>
-        </div>
-    </section>
-
-    <section id="system-health-overview">
-        <h2>System Health Overview</h2>
-        <div class="health-overview-cards">
-            <div class="health-overview-card">
-                <h3>Netapp Storage</h3>
-                <p>Utilization: <span id="netapp-overview-utilization">65%</span></p>
-                <p>Status: <span id="netapp-overview-status">Healthy</span></p>
-            </div>
-            <div class="health-overview-card">
-                <h3>Pure Storage</h3>
-                <p>Utilization: <span id="pure-overview-utilization">40%</span></p>
-                <p>Status: <span id="pure-overview-status">Healthy</span></p>
-            </div>
-            <div class="health-overview-card">
-                <h3>Dell Storage</h3>
-                <p>Utilization: <span id="dell-overview-utilization">80%</span></p>
-                <p>Status: <span id="dell-overview-status">Warning</span></p>   
-            </div>
-        </div>
-    </section>
-   
-    <h2>Managed Storage Systems</h2>
-    <ul class="storage-list">
-        <li>Netapp Storage</li>
-        <li>Pure Storage</li>
-        <li>Dell Storage</li>
-    </ul>
-
-    <h2>Quick Navigation</h2>
-    <ol>
-        <li><a href="#Capacity">Capacity & Utilization</a></li>
-        <li><a href="#system-health">System Health</a></li>
-        <li><a href="#Active-Alerts">Active Alerts</a></li>
-        <li><a href="#Inc_card">Report an incident</a></li>
-    </ol>
-
-    <h2 id="Capacity">Storage Capacity & Utilization</h2>
-    <p id="system-health">Overall System Status</p>
-    
-    <div class="table-container">
-        <table>
-            <tr>
-                <th>Storage system</th>
-                <th>Total Capacity</th>
-                <th>Used Capacity</th>
-                <th>Available Capacity</th>
-                <th>Health Status</th>
-                <th>Utilization</th>
-            </tr>
-            <tr>
-                <td>Netapp Storage</td>
-                <td id="netapp-total">100 TB</td>
-                <td id="netapp-used">65 TB</td>
-                <td id="netapp-available">35 TB</td>
-                <td id="netapp-status">Healthy</td>
-                <td>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="netapp-progress"></div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Pure Storage</td>
-                <td id="pure-total">50 TB</td>
-                <td id="pure-used">20 TB</td>
-                <td id="pure-available">30 TB</td>
-                <td id="pure-status">Healthy</td>
-                <td>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="pure-progress"></div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Dell Storage</td>
-                <td id="dell-total">250 TB</td>
-                <td id="dell-used">200 TB</td>
-                <td id="dell-available">50 TB</td>
-                <td id="dell-status">Warning</td>
-                <td>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="dell-progress"></div>
-                    </div>
-                </td>
-            </tr>
-        </table>
+    <!-- MOBILE TOP HEADER -->
+    <div class="mobile-header">
+        <span class="mobile-brand">InfraWatch</span>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
     </div>
 
-    <div class="capacity-control">
-        <label for="used-input">Dell Used Capacity (TB)</label>
-        <input type="number" id="used-input" value="195" min="0" max="250">
-        <button id="update-button">Update Dashboard</button>
-    </div>
+    <!-- BACKDROP OVERLAY -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-    <section id="Active-Alerts">
-        <h2>Active Alerts</h2>
-        <div class="alert-warning">
-            <h3>Storage Utilization Alerts</h3>
-            <p><span id="dell-used-alert">225 TB of 250 TB is currently used.</span></p>
-            <p>Storage Utilization: <span id="dell-utilization">90%</span></p>
-            <p id="Action-Msg">Monitor capacity and plan for expansion.</p>
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header-row">
+            <div>
+                <h2 class="sidebar-brand">InfraWatch</h2>
+                <p class="sidebar-subtitle">Infrastructure Monitoring</p>
+            </div>
+            <button class="close-sidebar" id="close-sidebar" aria-label="Close navigation menu">✕</button>
         </div>
-    </section>
 
-    <main class="incident-layout">
-        <section class="incident-form-card">
-            <form>
-                <h2 id="Inc_card">Report an Incident</h2>
-                
-                <label for="name">Name</label>
-                <input type="text" id="name" placeholder="Enter your name" required>
+        <nav>
+            <h2 class="sidebar-section-title">Quick Navigation</h2>
+            <ol class="sidebar-list">
+                <li><a href="#Capacity" class="nav-link">Capacity & Utilization</a></li>
+                <li><a href="#system-health-overview" class="nav-link">System Health</a></li>
+                <li><a href="#Active-Alerts" class="nav-link">Active Alerts</a></li>
+                <li><a href="#Inc_card" class="nav-link">Report an Incident</a></li>
+            </ol>
+        </nav>
 
-                <label for="storage-system">Affected Storage System</label>
-                <select id="storage-system">
-                    <option value="netapp">Netapp Storage</option>
-                    <option value="dell">Dell Storage</option>
-                    <option value="pure">Pure Storage</option>
-                </select>
+        <div>
+            <h2 class="sidebar-section-title">Managed Systems</h2>
+            <ul class="sidebar-list unstyled">
+                <li><a href="#Capacity" class="nav-link">Netapp Storage</a></li>
+                <li><a href="#Capacity" class="nav-link">Pure Storage</a></li>
+                <li><a href="#Capacity" class="nav-link">Dell Storage</a></li>
+            </ul>
+        </div>
 
-                <label for="issue-description">Incident Description</label>
-                <textarea id="issue-description" placeholder="Describe the issue" required></textarea>
+        <div>
+            <h2 class="sidebar-section-title">Technical Resources</h2>
+            <div class="sidebar-links-column">
+                <a href="https://www.google.com/" target="_blank">Google</a>
+                <a href="https://www.youtube.com/" target="_blank">YouTube</a>
+                <a href="https://www.linkedin.com/in/alveena-shaji-a600b6286/" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </aside>
 
-                <h3>Incident Priority</h3>
-                <input type="radio" id="low" name="incident-priority" value="low">
-                <label for="low">Low</label>
-                <input type="radio" id="medium" name="incident-priority" value="medium">
-                <label for="medium">Medium</label>
-                <input type="radio" id="high" name="incident-priority" value="high">
-                <label for="high">High</label>
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="dashboard-main">
+        <header class="main-header">
+            <h1 class="main-heading">InfraWatch Dashboard</h1> 
+            <h2>Real-time Infrastructure Monitoring & Analytics</h2> 
+        </header>
 
-                <h3>Issue Category</h3>
-                <input type="checkbox" id="capacity-cat" name="issue-category" value="capacity">
-                <label for="capacity-cat">Capacity</label>
-                <input type="checkbox" id="performance" name="issue-category" value="performance">
-                <label for="performance">Performance</label>
-                <input type="checkbox" id="connectivity" name="issue-category" value="connectivity">
-                <label for="connectivity">Connectivity</label>
-
-                <label for="email">Email</label>
-                <input id="email" type="email" placeholder="Enter your email id" required>
-
-                <label for="affected-capacity">Affected Capacity</label>
-                <input id="affected-capacity" type="number" placeholder="Enter capacity in TB" required>    
-
-                <button type="submit">Submit</button>
-            </form>
+        <section class="summary-cards">
+            <div class="summary-card">
+                <h3>Total Capacity</h3>
+                <p id="total-capacity">400 TB</p>    
+            </div>
+            <div class="summary-card">
+                <h3>Used Capacity</h3>
+                <p id="used-capacity">285 TB</p>
+            </div>
+            <div class="summary-card">
+                <h3>Available Capacity</h3>
+                <p id="available-capacity">115 TB</p>
+            </div>
+            <div class="summary-card">
+                <h3>Active Alerts</h3>
+                <p id="active-alerts-count">1</p>
+            </div>
+            <div class="summary-card">
+                <h3>Healthy Systems</h3>
+                <p id="healthy-count">0</p>
+            </div>
+            <div class="summary-card">
+                <h3>Warning Systems</h3>
+                <p id="warning-count">0</p>
+            </div>
+            <div class="summary-card">
+                <h3>Critical Systems</h3>
+                <p id="critical-count">0</p>
+            </div>
         </section>
 
-        <aside class="backup-performance-panel">
-            <h2>Backup Performance</h2>
-
-            <div class="backup-success-card">
-                <p>Backup Success Rate</p>
-                <h3 id="backup-success-rate">96.4%</h3>
-                <span id="backup-period-label">Last 7 Days</span>
-
-                <p class="backup-comparison">
-                    <span id="backup-trend-indicator">↑ 2.4%</span>
-                    <span> compared to previous period</span>
-                </p>
-            </div>
-
-            <div class="backup-stats">
-                <div>
-                    <p>Total Jobs</p>
-                    <h3 id="total-backup-jobs">55</h3>
+        <section id="system-health-overview">
+            <h2>System Health Overview</h2>
+            <div class="health-overview-cards">
+                <div class="health-overview-card">
+                    <h3>Netapp Storage</h3>
+                    <p>Utilization: <span id="netapp-overview-utilization">65%</span></p>
+                    <p>Status: <span id="netapp-overview-status">Healthy</span></p>
                 </div>
-                <div>
-                    <p>Successful</p>
-                    <h3 id="successful-backups">53</h3>
+                <div class="health-overview-card">
+                    <h3>Pure Storage</h3>
+                    <p>Utilization: <span id="pure-overview-utilization">40%</span></p>
+                    <p>Status: <span id="pure-overview-status">Healthy</span></p>
                 </div>
-                <div>
-                    <p>Failed</p>
-                    <h3 id="failed-backups">2</h3>
+                <div class="health-overview-card">
+                    <h3>Dell Storage</h3>
+                    <p>Utilization: <span id="dell-overview-utilization">80%</span></p>
+                    <p>Status: <span id="dell-overview-status">Warning</span></p>   
                 </div>
             </div>
+        </section>
 
-            <div class="backup-trend">
-                <div class="backup-trend-header">
-                    <h3>Backup Trend</h3>
-                    <select id="backup-time-range">
-                        <option value="24hours">Last 24 Hours</option>
-                        <option value="7days" selected>Last 7 Days</option>
-                        <option value="30days">Last 30 Days</option>
+        <h2 id="Capacity">Storage Capacity & Utilization</h2>
+        <p id="system-health">Overall System Status</p>
+        
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Storage system</th>
+                    <th>Total Capacity</th>
+                    <th>Used Capacity</th>
+                    <th>Available Capacity</th>
+                    <th>Health Status</th>
+                    <th>Utilization</th>
+                </tr>
+                <tr>
+                    <td>Netapp Storage</td>
+                    <td id="netapp-total">100 TB</td>
+                    <td id="netapp-used">65 TB</td>
+                    <td id="netapp-available">35 TB</td>
+                    <td id="netapp-status">Healthy</td>
+                    <td>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-fill" id="netapp-progress"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Pure Storage</td>
+                    <td id="pure-total">50 TB</td>
+                    <td id="pure-used">20 TB</td>
+                    <td id="pure-available">30 TB</td>
+                    <td id="pure-status">Healthy</td>
+                    <td>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-fill" id="pure-progress"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Dell Storage</td>
+                    <td id="dell-total">250 TB</td>
+                    <td id="dell-used">200 TB</td>
+                    <td id="dell-available">50 TB</td>
+                    <td id="dell-status">Warning</td>
+                    <td>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-fill" id="dell-progress"></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+       <div class="capacity-control scenario-panel">
+    <div class="scenario-header">
+        <h3>Simulate Dell Storage Workload Scenarios</h3>
+        <span class="scenario-subtitle">Click a state to test live telemetry & AI forecasting</span>
+    </div>
+    <div class="scenario-buttons">
+        <button type="button" class="scenario-btn normal" data-capacity="175">
+            🟢 Normal Load (175 TB / 70%)
+        </button>
+        <button type="button" class="scenario-btn warning active" data-capacity="200">
+            🟡 High Load Warning (200 TB / 80%)
+        </button>
+        <button type="button" class="scenario-btn critical" data-capacity="235">
+            🔴 Critical Spike (235 TB / 94%)
+        </button>
+    </div>
+</div>
+
+        <section id="Active-Alerts" class="section-spacing">
+            <h2>Active Alerts & AI Forecasting</h2>
+            
+            <div class="alert-warning">
+                <h3>Storage Utilization Alerts</h3>
+                <p><span id="dell-used-alert">200 TB of 250 TB is currently used.</span></p>
+                <p>Storage Utilization: <span id="dell-utilization">80%</span></p>
+                <p id="Action-Msg">Monitor capacity and plan for expansion.</p>
+            </div>
+
+            <!-- AI Capacity Run-Out Predictor Card -->
+            <div id="ai-advisor-card" class="ai-advisor-card">
+                <div class="ai-header-row">
+                    <h3 id="ai-advisor-title">🤖 AI Capacity Run-Out Predictor</h3>
+                    <span id="ai-confidence-badge">94% Model Confidence</span>
+                </div>
+                <p id="ai-prediction-text">Analyzing storage growth telemetry...</p>
+                <p id="ai-exhaustion-date"></p>
+            </div>
+        </section>
+
+        <div class="incident-layout">
+            <section class="incident-form-card">
+                <form>
+                    <h2 id="Inc_card">Report an Incident</h2>
+                    
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+
+                    <label for="storage-system">Affected Storage System</label>
+                    <select id="storage-system">
+                        <option value="netapp">Netapp Storage</option>
+                        <option value="dell">Dell Storage</option>
+                        <option value="pure">Pure Storage</option>
                     </select>
+
+                    <label for="issue-description">Incident Description</label>
+                    <textarea id="issue-description" placeholder="Describe the issue" required></textarea>
+
+                    <h3>Incident Priority</h3>
+                    <div class="radio-group">
+                        <div><input type="radio" id="low" name="incident-priority" value="low"> <label for="low">Low</label></div>
+                        <div><input type="radio" id="medium" name="incident-priority" value="medium"> <label for="medium">Medium</label></div>
+                        <div><input type="radio" id="high" name="incident-priority" value="high"> <label for="high">High</label></div>
+                    </div>
+
+                    <h3>Issue Category</h3>
+                    <div class="checkbox-group">
+                        <div><input type="checkbox" id="capacity-cat" name="issue-category" value="capacity"> <label for="capacity-cat">Capacity</label></div>
+                        <div><input type="checkbox" id="performance" name="issue-category" value="performance"> <label for="performance">Performance</label></div>
+                        <div><input type="checkbox" id="connectivity" name="issue-category" value="connectivity"> <label for="connectivity">Connectivity</label></div>
+                    </div>
+
+                    <label for="email">Email</label>
+                    <input id="email" type="email" placeholder="Enter your email id" required>
+
+                    <label for="affected-capacity">Affected Capacity</label>
+                    <input id="affected-capacity" type="number" placeholder="Enter capacity in TB" required>    
+
+                    <button type="submit">Submit Incident</button>
+                </form>
+            </section>
+
+            <aside class="backup-performance-panel">
+                <h2>Backup Performance</h2>
+
+                <div class="backup-success-card">
+                    <p class="backup-label">Backup Success Rate</p>
+                    <h3 id="backup-success-rate">96.4%</h3>
+                    <span id="backup-period-label">Last 7 Days</span>
+
+                    <p class="backup-comparison">
+                        <span id="backup-trend-indicator">↑ 2.4%</span>
+                        <span> compared to previous period</span>
+                    </p>
                 </div>
-                <canvas id="backupTrendChart"></canvas>
-            </div>
-        </aside>
+
+                <div class="backup-stats">
+                    <div>
+                        <p class="stat-label">Total Jobs</p>
+                        <h3 id="total-backup-jobs">55</h3>
+                    </div>
+                    <div>
+                        <p class="stat-label">Successful</p>
+                        <h3 id="successful-backups" class="text-success">53</h3>
+                    </div>
+                    <div>
+                        <p class="stat-label">Failed</p>
+                        <h3 id="failed-backups" class="text-danger">2</h3>
+                    </div>
+                </div>
+
+                <div class="backup-trend">
+                    <div class="backup-trend-header">
+                        <h3>Backup Trend</h3>
+                        <select id="backup-time-range">
+                            <option value="24hours">Last 24 Hours</option>
+                            <option value="7days" selected>Last 7 Days</option>
+                            <option value="30days">Last 30 Days</option>
+                        </select>
+                    </div>
+                    <canvas id="backupTrendChart"></canvas>
+                </div>
+            </aside>
+        </div>
+
+        <footer class="dashboard-footer">
+            <p>InfraWatch | Infrastructure Monitoring Dashboard</p>
+            <p>Demo project — sample storage data</p>
+        </footer>
     </main>
 
-    <nav>
-        <h2>Technical Resources</h2>
-        <a href="https://www.google.com/">Google</a>
-        <a href="https://www.youtube.com/">YouTube</a>
-        <a href="https://www.linkedin.com/in/alveena-shaji-a600b6286/">LinkedIn</a>
-    </nav>
-
-    <footer>
-        <p>InfraWatch | Infrastructure Monitoring Dashboard</p>
-        <p>Demo project — sample storage data</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script>
+        const menuToggle = document.getElementById("menu-toggle");
+        const closeSidebarBtn = document.getElementById("close-sidebar");
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("sidebar-overlay");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        function openMenu() {
+            sidebar.classList.add("open");
+            overlay.classList.add("active");
+            menuToggle.setAttribute("aria-expanded", "true");
+        }
+
+        function closeMenu() {
+            sidebar.classList.remove("open");
+            overlay.classList.remove("active");
+            menuToggle.setAttribute("aria-expanded", "false");
+        }
+
+        menuToggle.addEventListener("click", openMenu);
+        closeSidebarBtn.addEventListener("click", closeMenu);
+        overlay.addEventListener("click", closeMenu);
+
+        navLinks.forEach(link => {
+            link.addEventListener("click", closeMenu);
+        });
+
         const StorageSystems = [
-            { name: "Netapp Storage", capacity: 100, used: 65 },
-            { name: "Pure Storage", capacity: 50, used: 20 },
-            { name: "Dell Storage", capacity: 250, used: 200 }
+            { name: "Netapp Storage", capacity: 100, used: 65, dailyGrowthRate: 0.4 },
+            { name: "Pure Storage", capacity: 50, used: 20, dailyGrowthRate: 0.25 },
+            { name: "Dell Storage", capacity: 250, used: 200, dailyGrowthRate: 1.5 }
         ];
+
+        function runAICapacityPredictor() {
+            let mostAtRiskSystem = null;
+            let lowestDaysLeft = Infinity;
+
+            for (const system of StorageSystems) {
+                const remainingTB = system.capacity - system.used;
+                const daysLeft = remainingTB <= 0 ? 0 : Math.floor(remainingTB / system.dailyGrowthRate);
+
+                if (daysLeft < lowestDaysLeft) {
+                    lowestDaysLeft = daysLeft;
+                    mostAtRiskSystem = system;
+                }
+            }
+
+            const projectedDate = new Date();
+            projectedDate.setDate(projectedDate.getDate() + lowestDaysLeft);
+            const formattedDate = projectedDate.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric"
+            });
+
+            const aiCard = document.getElementById("ai-advisor-card");
+            const aiTitle = document.getElementById("ai-advisor-title");
+            const aiBadge = document.getElementById("ai-confidence-badge");
+            const aiText = document.getElementById("ai-prediction-text");
+            const aiDate = document.getElementById("ai-exhaustion-date");
+
+            if (lowestDaysLeft === 0) {
+                aiCard.className = "ai-advisor-card critical";
+                aiText.innerHTML = `<strong>Immediate Exhaustion Alert:</strong> <strong>${mostAtRiskSystem.name}</strong> has reached 100% capacity. Writes may fail immediately.`;
+                aiDate.textContent = `Projected Exhaustion Date: Today (${formattedDate})`;
+            } else if (lowestDaysLeft <= 20) {
+                aiCard.className = "ai-advisor-card critical";
+                aiText.innerHTML = `<strong>Critical Run-Out Risk:</strong> Based on a 7-day burn rate of <strong>${mostAtRiskSystem.dailyGrowthRate} TB/day</strong>, <strong>${mostAtRiskSystem.name}</strong> will hit 100% capacity in <strong>${lowestDaysLeft} days</strong>. Initiate emergency storage provisioning.`;
+                aiDate.textContent = `Projected Exhaustion Date: ${formattedDate}`;
+            } else if (lowestDaysLeft <= 45) {
+                aiCard.className = "ai-advisor-card warning";
+                aiText.innerHTML = `<strong>Capacity Advisory:</strong> At <strong>${mostAtRiskSystem.dailyGrowthRate} TB/day</strong> growth, <strong>${mostAtRiskSystem.name}</strong> has approximately <strong>${lowestDaysLeft} days</strong> of capacity remaining. Schedule a capacity expansion review.`;
+                aiDate.textContent = `Projected Exhaustion Date: ${formattedDate}`;
+            } else {
+                aiCard.className = "ai-advisor-card healthy";
+                aiText.innerHTML = `<strong>All Pools Healthy:</strong> Earliest projected capacity threshold is <strong>${mostAtRiskSystem.name}</strong> in <strong>${lowestDaysLeft} days</strong> (growing at ${mostAtRiskSystem.dailyGrowthRate} TB/day). No immediate procurement required.`;
+                aiDate.textContent = `Earliest Projected Exhaustion Date: ${formattedDate}`;
+            }
+        }
 
         function displayStorageData() {
             for (const system of StorageSystems) {
@@ -290,29 +414,18 @@
                     }
                 }
 
-                const totalElem = document.getElementById(prefix + "-total");
-                if (totalElem) totalElem.textContent = system.capacity + " TB";
-
-                const usedElem = document.getElementById(prefix + "-used");
-                if (usedElem) usedElem.textContent = system.used + " TB";
-
-                const availElem = document.getElementById(prefix + "-available");
-                if (availElem) availElem.textContent = available + " TB";
+                document.getElementById(prefix + "-total").textContent = system.capacity + " TB";
+                document.getElementById(prefix + "-used").textContent = system.used + " TB";
+                document.getElementById(prefix + "-available").textContent = available + " TB";
 
                 const statusElement = document.getElementById(prefix + "-status");
-                if (statusElement) {
-                    statusElement.textContent = status;
-                    statusElement.className = "status-" + status.toLowerCase();
-                }
+                statusElement.textContent = status;
+                statusElement.className = "status-" + status.toLowerCase();
 
-                const overviewUtil = document.getElementById(prefix + "-overview-utilization");
-                if (overviewUtil) overviewUtil.textContent = percentage.toFixed(0) + "%";
-
+                document.getElementById(prefix + "-overview-utilization").textContent = percentage.toFixed(0) + "%";
                 const overviewStatus = document.getElementById(prefix + "-overview-status");
-                if (overviewStatus) {
-                    overviewStatus.textContent = status;
-                    overviewStatus.className = "status-" + status.toLowerCase();
-                }
+                overviewStatus.textContent = status;
+                overviewStatus.className = "status-" + status.toLowerCase();
             }
 
             let healthyCount = 0;
@@ -348,7 +461,6 @@
             document.getElementById("used-capacity").textContent = summaryUsed + " TB";
             document.getElementById("available-capacity").textContent = summaryAvailable + " TB";
 
-            // Dell dynamic alert update
             const dellSystem = StorageSystems[2];
             const dellUtilization = (dellSystem.used / dellSystem.capacity) * 100;
             document.getElementById("dell-utilization").textContent = dellUtilization.toFixed(0) + "%";
@@ -369,30 +481,29 @@
                 dellStatusElem.className = "status-healthy";
                 actionMsg.textContent = "Capacity is within the acceptable range.";
             }
+
+            runAICapacityPredictor();
         }
 
-        const usedinput = document.getElementById("used-input");
-        const updatebutton = document.getElementById("update-button");
-        
-        updatebutton.addEventListener("click", function() {
-            const usedCapacity = Number(usedinput.value);
-            const totalCapacity = StorageSystems[2].capacity;
-            if (
-                usedinput.value.trim() === "" ||
-                isNaN(usedCapacity) ||
-                usedCapacity < 0 ||
-                usedCapacity > totalCapacity
-            ) {
-                alert("Enter a capacity between 0 and " + totalCapacity + " TB");
-                return;
-            }
-            StorageSystems[2].used = usedCapacity;
-            displayStorageData();
-        });
+        const scenarioButtons = document.querySelectorAll(".scenario-btn");
+
+scenarioButtons.forEach(button => {
+    button.addEventListener("click", function() {
+        // 1. Remove 'active' highlight from all buttons, then add to clicked one
+        scenarioButtons.forEach(btn => btn.classList.remove("active"));
+        this.classList.add("active");
+
+        // 2. Read the capacity from the button's data-capacity attribute
+        const newCapacity = Number(this.getAttribute("data-capacity"));
+
+        // 3. Update Dell Storage (index 2) and refresh the dashboard + AI Predictor
+        StorageSystems[2].used = newCapacity;
+        displayStorageData();
+    });
+});
 
         displayStorageData();
 
-        // Sample backup trend data
         const backupTrendData = {
             "24hours": {
                 labels: Array.from({ length: 24 }, (_, i) => `${String(i).padStart(2, "0")}:00`),
@@ -418,8 +529,8 @@
                 datasets: [{
                     label: "Backup Success Rate",
                     data: backupTrendData["7days"].values,
-                    borderColor: "#2563eb",
-                    backgroundColor: "rgba(37, 99, 235, 0.10)",
+                    borderColor: "#3b82f6",
+                    backgroundColor: "rgba(59, 130, 246, 0.15)",
                     fill: true,
                     tension: 0.35,
                     pointRadius: 3,
@@ -433,10 +544,14 @@
                     y: {
                         min: 80,
                         max: 100,
-                        title: { display: true, text: "Success Rate (%)" }
+                        ticks: { color: "#94a3b8" },
+                        grid: { color: "#334155" },
+                        title: { display: true, text: "Success Rate (%)", color: "#cbd5e1" }
                     },
                     x: {
-                        title: { display: true, text: "Time Period" }
+                        ticks: { color: "#94a3b8" },
+                        grid: { color: "#334155" },
+                        title: { display: true, text: "Time Period", color: "#cbd5e1" }
                     }
                 },
                 plugins: {
@@ -477,13 +592,13 @@
 
             if (difference > 0) {
                 indicator.textContent = "↑ " + difference.toFixed(1) + "%";
-                indicator.className = "improved";
+                indicator.style.color = "#4ade80";
             } else if (difference < 0) {
                 indicator.textContent = "↓ " + Math.abs(difference).toFixed(1) + "%";
-                indicator.className = "declined";
+                indicator.style.color = "#f87171";
             } else {
                 indicator.textContent = "— 0.0%";
-                indicator.className = "unchanged";
+                indicator.style.color = "#94a3b8";
             }
         }
 
