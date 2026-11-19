@@ -1,5 +1,7 @@
 # Storage Health & Capacity Dashboard
 
+🔗 **Live Demo:** https://alveenashaji06-dotcom.github.io/Storage-health-dashboard/
+
 ## Project Overview
 An interactive web dashboard that monitors storage capacity, health status, and predictive exhaustion timelines across enterprise storage systems. Combining enterprise storage administration experience with modern front-end development, the application enables real-time capacity planning, threshold-based health alerts, and operational load simulations.
 
@@ -18,6 +20,7 @@ An interactive web dashboard that monitors storage capacity, health status, and 
 * **GitHub Pages** — Static web deployment
 
 ## How to Run Locally
-1. Clone or download this repository:
+1. Clone this repository:
    ```bash
-   git clone https://alveenashaji06-dotcom.github.io/Storage-health-dashboard/
+   git clone [https://github.com/alveenashaji06-dotcom/Storage-health-dashboard.git]
+   
