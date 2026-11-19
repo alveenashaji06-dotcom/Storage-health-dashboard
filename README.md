@@ -20,4 +20,4 @@ An interactive web dashboard that monitors storage capacity, health status, and 
 ## How to Run Locally
 1. Clone or download this repository:
    ```bash
-   git clone <https://alveenashaji06-dotcom.github.io/Storage-health-dashboard/>
+   git clone https://alveenashaji06-dotcom.github.io/Storage-health-dashboard/
